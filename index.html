@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Grams Family Website</title>
+        <style>
+            * {
+                font-family: 'Bree Serif', serif;
+            }
+            body {
+                background-color: #baf4d6;
+            }
+            h1 {
+                margin-top: 0;
+                border-bottom: 5px solid black;
+            }
+            a {
+                display: block;
+            }
+            svg {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+            }
+            line {
+                stroke-width: 2;
+                stroke: black;
+            }
+            #members {
+                text-align: center;
+            }
+            .tree-column {
+                display: inline-block;
+                margin: 20px;
+                padding: 10px;
+                border: 2px solid black;
+                position: relative;
+                z-index: 999;
+                background-color: white;
+            }
+            .tree-row {
+                margin: 20px;
+            }
+            #container-wrapper {
+                overflow: auto;
+                width: 100%;
+            }
+            #container {
+                position:relative;
+                width: 10000px; /* this will get updated */
+                height: 10000px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        </style>
+        <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+        <script>
+            var familyMembers = [
+                { name: "Rollin Gene Grams", link: "https://bibleandmission.blogspot.com", id: "rollingenegrams", fatherId: "root", spouseId: "wendydaviesgrams" },
+                { name: "Wendy Davies Grams", link: "https://rachelslearningvillage.wordpress.com", id: "wendydaviesgrams", fatherId: null },
+                { name: "David Rollin Grams", link: "https://www.instagram.com/dgrams4/", id: "davidrollingrams", fatherId: "rollingenegrams" },
+                { name: "James Rollin Grams", link: "https://jamesgrams.com", id: "jamesrollingrams", spouseId: "kaseyalexandragrams", fatherId: "rollingenegrams" },
+                { name: "Kasey Alexandra Grams", link: "https://www.facebook.com/musikmann95", id: "kaseyalexandragrams", fatherId: null },
+                { name: "Elisha Jameson Grams", link: "https://tinybeans.com/app/#/main/journals/1241481/2019/4", id: "elishajamesongrams", fatherId: "jamesrollingrams" },
+                { name: "Rachel Evelyn Davies Grams", link: "https://www.instagram.com/rachel_grams/", id: "rachelevelyndaviesgrams", fatherId: "rollingenegrams" },
+            ];
+
+            document.addEventListener('DOMContentLoaded', function() {
+                addChildren( null, "root", 0 );
+                // remove the last row since it is not needed
+                $('.tree-row:last-child').remove();
+                // calculate the height and width to make the container
+                var $rows = $(".tree-row");
+                var height = $rows.outerHeight() * $rows.length;
+                var width = 0;
+                for( var i=0; i<$rows.length; i++ ) {
+                    var rowWidth = 0;
+                    var $row = $($rows[i]);
+                    var $columns = $row.find(".tree-column");
+                    for( var j=0; j<$columns.length; j++) {
+                        rowWidth += $($columns[j]).outerWidth(true);
+                    }
+                    if( rowWidth > width ) {
+                        width = rowWidth;
+                    }
+                }
+                var margin = parseInt($rows.css("marginTop").replace("px","")) * 2;
+                // These numbers added work, but not sure why exactly these extra values are needed
+                $("#container").width( width + margin + 100 );
+                $("#container").height( height + margin + 10 );
+                $("#container-wrapper").height( Math.min(height + margin + 10 + margin, 500) ); // Up to 500px high before having scroll
+                addConnections();
+                $('#container-wrapper').scrollLeft( $('#container').width()/2 - $('#container-wrapper').width()/2 );
+            });
+            // Add children to the family tree
+            function addChildren( $parentElement, parentId, depth ) {
+                var $members = $("#members");
+                $rows = $members.find(".tree-row");
+                if( depth >= $rows.length ) {
+                    var $newRow = $('<div>').addClass("tree-row");
+                    $rows.push( $newRow );
+                    $members.append( $newRow );
+                }
+                var $row = $($rows[depth]);
+                for( var i=0; i<familyMembers.length; i++ ) {
+                    if( familyMembers[i].fatherId == parentId ) {
+                        if( !$("#" + familyMembers[i].id).length ) {// If the element does not already exist (only needed for spouses)
+                            var $column = createPerson(familyMembers[i].id, familyMembers[i].name, familyMembers[i].link);
+                            $row.append( $column );
+                            // Add or move the spouse
+                            if( familyMembers[i].spouseId ) {
+                                addSpouse( $column, familyMembers[i].spouseId );
+                            }
+                            addChildren( $column, familyMembers[i].id, depth+1 );
+                        }
+                    }
+                }
+            }
+            // Add the wife after the husband (they're always neighbors)
+            function addSpouse( $husbandElement, spouseId ) {
+                // check if there is an id
+                var $spouse = $("#" + spouseId);
+                if( !$spouse.length ) {
+                    for( var i=0; i<familyMembers.length; i++) {
+                        if( familyMembers[i].id == spouseId ) {
+                            $spouse = createPerson(familyMembers[i].id, familyMembers[i].name, familyMembers[i].link );
+                        }
+                    }
+                }
+                $husbandElement.after($spouse);
+            }
+            // Create a person
+            function createPerson(id, name, link) {
+                var $el = $('<div>').addClass("tree-column").attr("id", id).append("<a>");
+                if( link ) {
+                    $el.append( $('<a>').attr('href', link).attr('target', '_blank').attr('rel', 'noopener').text(name) );
+                }
+                else {
+                    $el.text(name);
+                }
+                return $el;
+            }
+            // Add connections
+            function addConnections() {
+                for(var i=0;i<familyMembers.length;i++) {
+                    if(familyMembers[i].fatherId && familyMembers[i].fatherId != "root") {
+                        drawLine( $("#"+familyMembers[i].fatherId), $("#"+familyMembers[i].id), true );
+                    }
+                    if(familyMembers[i].spouseId) {
+                        drawLine( $("#"+familyMembers[i].spouseId), $("#"+familyMembers[i].id) );
+                    }
+                }
+            }
+            // Draw line
+            function drawLine($el1, $el2, isChild) {
+                // Assumes all elements have the same padding and border on all sides
+                var padding = parseInt($el1.css("paddingTop").replace("px",""));
+                var borderWidth = parseInt($el1.css("border-left-width").replace("px",""));
+                padding += borderWidth;
+
+                var leftOffset = 0;
+                if( isChild ) {
+                    var margin = parseInt($el1.css("marginTop").replace("px",""));
+                    leftOffset += $el1.width()/2 + padding + margin;
+                }
+                var containerOffsetTop = $('#container').offset().top;
+                var containerOffsetLeft = $('#container').offset().left;
+
+                var $svg = $("svg");
+                var $line = $(document.createElementNS("http://www.w3.org/2000/svg", "line"));
+                $svg.append($line);
+
+                var x1 = $el1.offset().left + ($el1.width()/2) + padding + leftOffset - containerOffsetLeft;
+                var y1 = $el1.offset().top + ($el1.height()/2) + padding - containerOffsetTop;
+                var x2 = $el2.offset().left + ($el2.width()/2) + padding - containerOffsetLeft;
+                var y2 = $el2.offset().top + ($el2.height()/2) + padding - containerOffsetTop;
+
+                $line.attr('x1',x1).attr('y1',y1).attr('x2',x2).attr('y2',y2);
+            }
+        </script>
+        <link href="https://fonts.googleapis.com/css?family=Bree+Serif" rel="stylesheet">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+    </head>
+    <body>
+        <h1>Welcome to the Grams Family Website!</h1>
+        <h2>Members</h2>
+        <!-- wrapper to control scrolling of the container -->
+        <div id="container-wrapper">
+            <!-- container for the svg and all the family members -->
+            <div id="container">
+                <div id="members"></div>
+                <svg></svg>
+            </div>
+        </div>
+        <p>
+            Thank you for visiting the Grams Family Website! We hope you enjoy!
+        </p>
+    </body>
+</html>
