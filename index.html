@@ -29,6 +29,7 @@
             }
             #members {
                 text-align: center;
+                display: inline-block;
             }
             .tree-column {
                 display: inline-block;
@@ -38,6 +39,19 @@
                 position: relative;
                 z-index: 999;
                 background-color: white;
+            }
+            .tree-column div {
+                font-size: 75%;
+            }
+            .tree-column .social {
+                font-size: 100%;
+            }
+            .tree-column .social a {
+                color: black;
+            }
+            .tree-column .social a {
+                display: inline-block;
+                padding: 0 3px;
             }
             .tree-row {
                 margin: 20px;
@@ -61,55 +75,158 @@
             // for where they start if not the top of the tree (1 = second row)
             // To add a female, simply add their name, id, and fatherId (necessary only if not married)
             var familyMembers = [
-                { name: "Eugene Grams", id: "eugenegrams", fatherId: "root", spouseId: "phyllisgrams" },
-                { name: "Phyllis Evelyn Grams", id: "phyllisgrams" },
-                { name: "Bryan George Davies", id: "briangeorgedavies", fatherId: "root", spouseId: "junedavies" },
-                { name: "June Davies", id: "junedavies" },
-                { name: "Edwin Mann", id: "edwinmann", fatherId: "root", spouseId: "thelmajomann" },
-                { name: "Thelma Jo Mann", id: "thelmajomann" },
-                { name: "Robert Barry Moore", id: "robertbarrymoore", fatherId: "root", spouseId: "paulabenveymoore" },
-                { name: "Paula Benvey Moore", id: "paulabenveymoore" },
-                { name: "Rollin Gene Grams", link: "https://bibleandmission.blogspot.com", id: "rollingenegrams", fatherId: "eugenegrams", spouseId: "wendydaviesgrams" },
-                { name: "Wendy Davies Grams", link: "https://rachelslearningvillage.wordpress.com", id: "wendydaviesgrams", fatherId: "briangeorgedavies" },
-                { name: "David William Mann", link: "https://www.facebook.com/profile.php?id=100006299160953", id: "davidwilliammann", fatherId: "edwinmann", spouseId: "robinpaulamann" },
-                { name: "Robin Paula Mann", link: "https://www.facebook.com/robin.mann.969", id: "robinpaulamann", fatherId: "robertbarrymoore" },
-                { name: "David Rollin Grams", link: "https://www.instagram.com/dgrams4/", id: "davidrollingrams", fatherId: "rollingenegrams" },
-                { name: "James Rollin Grams", link: "https://jamesgrams.com", id: "jamesrollingrams", spouseId: "kaseyalexandragrams", fatherId: "rollingenegrams" },
-                { name: "Kasey Alexandra Grams", link: "https://www.facebook.com/musikmann95", id: "kaseyalexandragrams", fatherId: "davidwilliammann" },
-                { name: "Aaron David Mann", link: "https://www.facebook.com/aaron.mann.986", id: "aarondavidmann", fatherId: "davidwilliammann" },
-                { name: "Elisha Jameson Grams", link: "https://tinybeans.com/app/#/main/journals/1241481/2019/4", id: "elishajamesongrams", fatherId: "jamesrollingrams" },
-                { name: "Rachel Evelyn Davies Grams", link: "https://www.instagram.com/rachel_grams/", id: "rachelevelyndaviesgrams", fatherId: "rollingenegrams" },
+                { 
+                    name: "Eugene Grams",
+                    id: "eugenegrams",
+                    fatherId: "root",
+                    spouseId: "phyllisgrams"
+                },
+                { 
+                    name: "Phyllis Evelyn Grams",
+                    id: "phyllisgrams"
+                },
+                { 
+                    name: "Bryan George Davies",
+                    id: "briangeorgedavies",
+                    fatherId: "root",
+                    spouseId: "junedavies"
+                },
+                { 
+                    name: "June Davies",
+                    id: "junedavies"
+                },
+                { 
+                    name: "Edwin Mann",
+                    id: "edwinmann",
+                    fatherId: "root",
+                    spouseId: "thelmajomann"
+                },
+                { 
+                    name: "Thelma Jo Mann",
+                    id: "thelmajomann"
+                },
+                { 
+                    name: "Robert Barry Moore",
+                    id: "robertbarrymoore",
+                    fatherId: "root",
+                    spouseId: "paulabenveymoore"
+                },
+                { 
+                    name: "Paula Benvey Moore", 
+                    id: "paulabenveymoore"
+                },
+                { 
+                    name: "Rollin Gene Grams", 
+                    link: "https://bibleandmission.blogspot.com", 
+                    id: "rollingenegrams", 
+                    fatherId: "eugenegrams", 
+                    spouseId: "wendydaviesgrams",
+                    birthday: new Date(1958, 6, 25, 0, 0, 0),
+                    birthplace: "Welcom, South Africa",
+                    email: "rollingrams@yahoo.com"
+                },
+                { 
+                    name: "Wendy Davies Grams", 
+                    link: "https://rachelslearningvillage.wordpress.com", 
+                    id: "wendydaviesgrams", 
+                    fatherId: "briangeorgedavies",
+                    birthday: new Date(1960, 11, 25, 0, 0, 0),
+                    birthplace: "Durban, South Africa",
+                    email: "wdgrams@yahoo.com"
+                },
+                { 
+                    name: "David William Mann", 
+                    id: "davidwilliammann", 
+                    fatherId: "edwinmann", 
+                    spouseId: "robinpaulamann",
+                    facebook: "https://www.facebook.com/profile.php?id=100006299160953"
+                },
+                { 
+                    name: "Robin Paula Mann", 
+                    id: "robinpaulamann", 
+                    fatherId: "robertbarrymoore",
+                    facebook: "https://www.facebook.com/robin.mann.969"
+                },
+                { 
+                    name: "David Rollin Grams", 
+                    id: "davidrollingrams", 
+                    fatherId: "rollingenegrams",
+                    birthday: new Date(1994, 6, 27, 0, 0, 0),
+                    birthplace: "Charlotte, NC, USA",
+                    email: "grams.david@ymail.com",
+                    instagram: "https://www.instagram.com/dgrams4/"
+                },
+                { 
+                    name: "James Rollin Grams", 
+                    link: "https://jamesgrams.com", 
+                    id: "jamesrollingrams", 
+                    spouseId: "kaseyalexandragrams", 
+                    fatherId: "rollingenegrams",
+                    birthday: new Date(1995, 11, 4, 0, 0, 0, 0),
+                    birthplace: "Charlotte, NC, USA",
+                    email: "james@game103.net",
+                },
+                { 
+                    name: "Kasey Alexandra Grams", 
+                    id: "kaseyalexandragrams", 
+                    fatherId: "davidwilliammann",
+                    birthday: new Date(1995, 7, 28, 0, 0, 0),
+                    birthplace: "Beverly, MA, USA",
+                    email: "jkgrams@game103.net",
+                    facebook: "https://www.facebook.com/musikmann95",
+                },
+                { 
+                    name: "Aaron David Mann", 
+                    id: "aarondavidmann", 
+                    fatherId: "davidwilliammann",
+                    birthplace: "Beverly, MA, USA",
+                    facebook: "https://www.facebook.com/aaron.mann.986"
+                },
+                { 
+                    name: "Elisha Jameson Grams", 
+                    link: "https://tinybeans.com/app/#/main/journals/1241481/2019/4", 
+                    id: "elishajamesongrams", 
+                    fatherId: "jamesrollingrams",
+                    birthday: new Date(2019, 2, 21, 16, 30, 0),
+                    birthplace: "Beverly, MA, USA"
+
+                },
+                { 
+                    name: "Rachel Evelyn Davies Grams", 
+                    id: "rachelevelyndaviesgrams", 
+                    fatherId: "rollingenegrams",
+                    birthday: new Date(1999, 10, 10, 0, 0, 0),
+                    birthplace: "Oxford, UK",
+                    email: "rachelgrams10@gmail.com",
+                    instagram: "https://www.instagram.com/rachel_grams/",
+                    facebook: "https://www.facebook.com/profile.php?id=100014047242063",
+                    twitter: "https://twitter.com/rachel_grams"
+                },
             ];
 
-            document.addEventListener('DOMContentLoaded', function() {
-                addChildren( null, "root", 0 );
+            $(document).ready( function() {
 
-                // remove the last row since it is not needed
-               // $('.tree-row:last-child').remove();
+                // We need to wait until fonts are loaded, because fonts impact the size of the boxes
+                // and the box sizes impact the positions of the lines that are drawn
+                waitForWebfonts( ["Bree Serif"], function() {
+                    // We want to draw the graph now
+                    addChildren( null, "root", 0 );
 
-                // calculate the height and width to make the container
-                var $rows = $(".tree-row");
-                var height = $rows.outerHeight() * $rows.length;
-                var width = 0;
-                for( var i=0; i<$rows.length; i++ ) {
-                    var rowWidth = 0;
-                    var $row = $($rows[i]);
-                    var $columns = $row.find(".tree-column");
-                    for( var j=0; j<$columns.length; j++) {
-                        rowWidth += $($columns[j]).outerWidth(true);
-                    }
-                    if( rowWidth > width ) {
-                        width = rowWidth;
-                    }
-                }
-                var margin = parseInt($rows.css("marginTop").replace("px","")) * 2;
-                // These numbers added work, but not sure why exactly these extra values are needed
-                $("#container").width( width + margin + 100 );
-                $("#container").height( height + margin + 20 );
-                // 40 for the scrollbar, only 20 is needed line before (is this for borders?)
-                $("#container-wrapper").height( Math.min(height + margin + 40 + margin, 1000) ); // Up to 500px high before having scroll
-                addConnections();
-                $('#container-wrapper').scrollLeft( $('#container').width()/2 - $('#container-wrapper').width()/2 );
+                    // calculate the height and width to make the container
+                    // These numbers added work, but not sure why exactly these extra values are needed
+                    $("#container").width( $('#members').width() + 2 );
+                    var $membersHeight = $('#members').height() + 2
+                    $("#container").height( $membersHeight );
+                    // 20 for the scrollbar, only 2 is needed line before
+                    $("#container-wrapper").height( Math.min( $membersHeight + 20, 1000 ) ); // Up to 500px high before having scroll
+                    
+                    // Draw all the lines
+                    addConnections();
+                    
+                    // Center the family tree
+                    $('#container-wrapper').scrollLeft( $('#container').width()/2 - $('#container-wrapper').width()/2 );
+                } );
+
             });
             // Add children to the family tree
             function addChildren( $parentElement, parentId, depth ) {
@@ -120,7 +237,7 @@
                     if( familyMembers[i].fatherId == parentId ) {
                         if( !$("#" + familyMembers[i].id).length ) {// If the element does not already exist (only needed for spouses)
                             var curDepth = depth;
-                            var $column = createPerson(familyMembers[i].id, familyMembers[i].name, familyMembers[i].link);
+                            var $column = createPerson(familyMembers[i]);
 
                             // allow for a custom depth to be set for a user (this can be used to start someone who isn't at the same level as the root)
                             if(familyMembers[i].customDepth) {
@@ -161,20 +278,56 @@
                 if( !$spouse.length ) {
                     for( var i=0; i<familyMembers.length; i++) {
                         if( familyMembers[i].id == spouseId ) {
-                            $spouse = createPerson(familyMembers[i].id, familyMembers[i].name, familyMembers[i].link );
+                            $spouse = createPerson(familyMembers[i]);
                         }
                     }
                 }
                 $husbandElement.after($spouse);
             }
             // Create a person
-            function createPerson(id, name, link) {
-                var $el = $('<div>').addClass("tree-column").attr("id", id).append("<a>");
-                if( link ) {
-                    $el.append( $('<a>').attr('href', link).attr('target', '_blank').attr('rel', 'noopener').text(name) );
+            function createPerson(member) {
+                var $el = $('<div>').addClass("tree-column").attr("id", member.id).append("<a>");
+                if( member.link ) {
+                    $el.append( $('<a>').attr('href', member.link).attr('target', '_blank').attr('rel', 'noopener').text(member.name) );
                 }
                 else {
-                    $el.text(name);
+                    $el.text(member.name);
+                }
+                if( member.birthday ) {
+                    var today = new Date();
+                    var millisecondsPerYear = 31556952000;
+                    var yearsOld = Math.floor((today.getTime() - member.birthday.getTime())/millisecondsPerYear);
+                    var yearsLabel = yearsOld != 1 ? "years" : "year";
+                    var $birthdayDiv = $('<div>').text( member.birthday.toLocaleDateString() + " (" + yearsOld + " " + yearsLabel + " old)" );
+                    $el.append($birthdayDiv);
+                }
+                if( member.birthplace ) {
+                    var $birthplaceDiv = $('<div>').text( "Born in " + member.birthplace );
+                    $el.append($birthplaceDiv);
+                }
+                if( member.facebook || member.instagram || member.email || member.twitter ) {
+                    var $socialDiv = $('<div>').addClass("social");
+                    if( member.email ) {
+                        var $email = $('<a>').attr("href", "mailto:" + member.email);
+                        $email.append( $("<i>").addClass("fas").addClass("fa-envelope") );
+                        $socialDiv.append($email);
+                    }
+                    if( member.facebook ) {
+                        var $facebook = $('<a>').attr("href", member.facebook);
+                        $facebook.append( $("<i>").addClass("fab").addClass("fa-facebook-square") );
+                        $socialDiv.append($facebook);
+                    }
+                    if( member.twitter ) {
+                        var $twitter = $('<a>').attr("href", member.twitter);
+                        $twitter.append( $("<i>").addClass("fab").addClass("fa-twitter") );
+                        $socialDiv.append($twitter);
+                    }
+                    if( member.instagram ) {
+                        var $instagram = $('<a>').attr("href", member.instagram);
+                        $instagram.append( $("<i>").addClass("fab").addClass("fa-instagram") );
+                        $socialDiv.append($instagram);
+                    }
+                    $el.append($socialDiv);
                 }
                 return $el;
             }
@@ -191,32 +344,106 @@
             }
             // Draw line
             function drawLine($el1, $el2, isChild) {
-                // Assumes all elements have the same padding and border on all sides
+                // Assumes all elements have the same padding, margin, and border on all sides
                 var padding = parseInt($el1.css("paddingLeft").replace("px",""));
                 var borderWidth = parseInt($el1.css("border-left-width").replace("px",""));
                 padding += borderWidth;
 
-                var leftOffset = 0;
-                if( isChild ) {
-                    var margin = parseInt($el1.css("marginLeft").replace("px",""));
-                    leftOffset += $el1.width()/2 + padding + margin;
-                }
                 var containerOffsetTop = $('#container').offset().top;
                 var containerOffsetLeft = $('#container').offset().left;
+
+                var leftOffset = 0;
+                var topOffset = 0;
+                if( isChild ) {
+                    var margin = parseInt($el1.css("marginLeft").replace("px",""));
+                    leftOffset = $el1.width()/2 + padding + margin;
+                    
+                    // Find the wife
+                    var $wife = $el1.next(".tree-column");
+                    
+                    // Find the vertical incline between the husband and the wife
+                    var incline = $el1.offset().top + ($el1.height()/2) + padding - containerOffsetTop;
+                    incline -= $wife.offset().top + ($wife.height()/2) + padding - containerOffsetTop;
+                    incline = incline * -1;
+
+                    // Find the horizontal distance from the husband point to the wife point
+                    var lineHorizontalLength = leftOffset + ( $wife.width()/2 + padding + margin );
+
+                    // The top offset is going to be the percent the leftOffset is of the whole line
+                    // (the percent of the line corresponding to the husband's side), multiplied by the total
+                    // vertical incline.
+                    topOffset = leftOffset/lineHorizontalLength * incline;
+                }
 
                 var $svg = $("svg");
                 var $line = $(document.createElementNS("http://www.w3.org/2000/svg", "line"));
                 $svg.append($line);
 
                 var x1 = $el1.offset().left + ($el1.width()/2) + padding + leftOffset - containerOffsetLeft;
-                var y1 = $el1.offset().top + ($el1.height()/2) + padding - containerOffsetTop;
+                var y1 = $el1.offset().top + ($el1.height()/2) + padding + topOffset - containerOffsetTop;
                 var x2 = $el2.offset().left + ($el2.width()/2) + padding - containerOffsetLeft;
                 var y2 = $el2.offset().top + ($el2.height()/2) + padding - containerOffsetTop;
 
                 $line.attr('x1',x1).attr('y1',y1).attr('x2',x2).attr('y2',y2);
             }
+            // Wait for a web font to load
+            // taken from here: https://stackoverflow.com/questions/4383226/using-jquery-to-know-when-font-face-fonts-are-loaded
+            function waitForWebfonts(fonts, callback) {
+                var loadedFonts = 0;
+                for(var i = 0, l = fonts.length; i < l; ++i) {
+                    (function(font) {
+                        var node = document.createElement('span');
+                        // Characters that vary significantly among different fonts
+                        node.innerHTML = 'giItT1WQy@!-/#';
+                        // Visible - so we can measure it - but not on the screen
+                        node.style.position      = 'absolute';
+                        node.style.left          = '-10000px';
+                        node.style.top           = '-10000px';
+                        // Large font size makes even subtle changes obvious
+                        node.style.fontSize      = '300px';
+                        // Reset any font properties
+                        node.style.fontFamily    = 'sans-serif';
+                        node.style.fontVariant   = 'normal';
+                        node.style.fontStyle     = 'normal';
+                        node.style.fontWeight    = 'normal';
+                        node.style.letterSpacing = '0';
+                        document.body.appendChild(node);
+
+                        // Remember width with no applied web font
+                        var width = node.offsetWidth;
+
+                        node.style.fontFamily = font + ', sans-serif';
+
+                        var interval;
+                        function checkFont() {
+                            // Compare current width with original width
+                            if(node && node.offsetWidth != width) {
+                                ++loadedFonts;
+                                node.parentNode.removeChild(node);
+                                node = null;
+                            }
+
+                            // If all fonts have been loaded
+                            if(loadedFonts >= fonts.length) {
+                                if(interval) {
+                                    clearInterval(interval);
+                                }
+                                if(loadedFonts == fonts.length) {
+                                    callback();
+                                    return true;
+                                }
+                            }
+                        };
+
+                        if(!checkFont()) {
+                            interval = setInterval(checkFont, 50);
+                        }
+                    })(fonts[i]);
+                }
+            };
         </script>
         <link href="https://fonts.googleapis.com/css?family=Bree+Serif" rel="stylesheet">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
         <meta name="viewport" content="width=device-width,initial-scale=1">
     </head>
     <body>
