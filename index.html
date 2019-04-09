@@ -27,6 +27,12 @@
                 stroke-width: 2;
                 stroke: black;
             }
+            line.marriage {
+                stroke: red;
+            }
+            text {
+                font-size: 50%;
+            }
             #members {
                 text-align: center;
                 display: inline-block;
@@ -53,12 +59,32 @@
                 display: inline-block;
                 padding: 0 3px;
             }
+            .birthplace a {
+                display: inline;
+            }
+            .picture {
+                display: none;
+                position: absolute;
+                top: 0;
+                transform: translateY(-100%);
+                left: -2px;
+                border: 2px solid black;
+                width: 100%;
+            }
+            .picture img {
+                width: 100%;
+                display: block;
+            }
+            .tree-column:hover .picture {
+                display: block;
+            }
             .tree-row {
                 margin: 20px;
             }
             #container-wrapper {
                 overflow: auto;
-                width: 100%;
+                width: calc(100% - 20px);
+                border: 10px solid #70593d;
             }
             #container {
                 position:relative;
@@ -76,10 +102,23 @@
             // To add a female, simply add their name, id, and fatherId (necessary only if not married)
             var familyMembers = [
                 { 
+                    name: "Andrew Leong", 
+                    id: "andrewleong", 
+                    fatherId: "root",
+                    customDepth: 2,
+                    spouseId: "victorialeong"
+                },
+                { 
+                    name: "Victoria Leong", 
+                    id: "victorialeong", 
+                    fatherId: "daryllgrams"
+                },
+                { 
                     name: "Eugene Grams",
                     id: "eugenegrams",
                     fatherId: "root",
-                    spouseId: "phyllisgrams"
+                    spouseId: "phyllisgrams",
+                    anniversary: new Date(1952, 2, 20, 0, 0, 0)
                 },
                 { 
                     name: "Phyllis Evelyn Grams",
@@ -200,18 +239,6 @@
                     facebook: "https://www.facebook.com/robin.mann.969"
                 },
                 { 
-                    name: "Andrew Leong", 
-                    id: "andrewleong", 
-                    fatherId: "root",
-                    customDepth: 2,
-                    spouseId: "victorialeong"
-                },
-                { 
-                    name: "Victoria Leong", 
-                    id: "victorialeong", 
-                    fatherId: "daryllgrams"
-                },
-                { 
                     name: "Brandon Grams", 
                     id: "brandongrams", 
                     fatherId: "daryllgrams"
@@ -228,6 +255,7 @@
                     birthday: new Date(1994, 6, 27, 0, 0, 0),
                     birthplace: "Charlotte, NC, USA",
                     email: "grams.david@ymail.com",
+                    facebook: "https://www.facebook.com/david.grams.395",
                     instagram: "https://www.instagram.com/dgrams4/"
                 },
                 { 
@@ -235,10 +263,12 @@
                     link: "https://jamesgrams.com", 
                     id: "jamesrollingrams", 
                     spouseId: "kaseyalexandragrams", 
+                    anniversary: new Date(2017, 5, 17, 0, 0, 0),
                     fatherId: "rollingenegrams",
                     birthday: new Date(1995, 11, 4, 0, 0, 0, 0),
                     birthplace: "Charlotte, NC, USA",
                     email: "james@game103.net",
+                    picture: "images/jamesrollingrams.jpg"
                 },
                 { 
                     name: "Kasey Alexandra Grams", 
@@ -248,6 +278,7 @@
                     birthplace: "Beverly, MA, USA",
                     email: "jkgrams@game103.net",
                     facebook: "https://www.facebook.com/musikmann95",
+                    picture: "images/kaseyalexandragrams.jpg"
                 },
                 { 
                     name: "Aaron David Mann", 
@@ -262,8 +293,8 @@
                     id: "elishajamesongrams", 
                     fatherId: "jamesrollingrams",
                     birthday: new Date(2019, 2, 21, 16, 30, 0),
-                    birthplace: "Beverly, MA, USA"
-
+                    birthplace: "Beverly, MA, USA",
+                    picture: "images/elishajamesongrams.jpg"
                 },
                 { 
                     name: "Rachel Evelyn Davies Grams", 
@@ -274,19 +305,25 @@
                     email: "rachelgrams10@gmail.com",
                     instagram: "https://www.instagram.com/rachel_grams/",
                     facebook: "https://www.facebook.com/profile.php?id=100014047242063",
-                    twitter: "https://twitter.com/rachel_grams"
+                    twitter: "https://twitter.com/rachel_grams",
+                    picture: "images/rachelevelyndaviesgrams.jpg"
                 },
                 { 
                     name: "Christopher Davies", 
                     id: "christopherdavies", 
                     fatherId: "richarddavies",
-                    spouseId: "laurendavies",
+                    spouseId: "laurenholleydavies",
                     birthday: new Date(1990, 11, 16, 0, 0, 0),
-                    birthplace: "Charlotte, NC, USA"
+                    birthplace: "Charlotte, NC, USA",
+                    anniversary: new Date(2015, 6, 20, 0, 0, 0),
+                    facebook: "https://www.facebook.com/chris.davies.1675",
+                    instagram: "https://www.instagram.com/young_davis/"
                 },
                 { 
-                    name: "Lauren Davies", 
-                    id: "laurendavies"
+                    name: "Lauren Holley Davies", 
+                    id: "laurenholleydavies",
+                    facebook: "https://www.facebook.com/lauren.holley.9",
+                    instagram: "https://www.instagram.com/laurenh_davies/"
                 },
                 { 
                     name: "Luke Davies", 
@@ -304,25 +341,31 @@
                     name: "Timothy Davies", 
                     id: "timothydavies", 
                     fatherId: "richarddavies",
-                    birthplace: "Charlotte, NC, USA"
+                    birthplace: "Charlotte, NC, USA",
+                    facebook: "https://www.facebook.com/tim.davies.9041"
                 },
                 { 
                     name: "John Sawyer Davies", 
                     id: "johnsawyerdavies", 
                     fatherId: "garydavies",
-                    birthplace: "Charlotte, NC, USA"
+                    birthplace: "Charlotte, NC, USA",
+                    instagram: "https://www.instagram.com/sawyerdavies17/"
                 },
                 { 
                     name: "Elliott Davies", 
                     id: "elliottdavies", 
                     fatherId: "garydavies",
-                    birthplace: "Charlotte, NC, USA"
+                    birthplace: "Charlotte, NC, USA",
+                    facebook: "https://www.facebook.com/elliott.davies.779",
+                    instagram: "https://www.instagram.com/elliott_davies/"
                 },
                 { 
                     name: "Arden Elizabeth Davies", 
                     id: "ardenelizabethdavies", 
                     fatherId: "garydavies",
-                    birthplace: "Charlotte, NC, USA"
+                    birthplace: "Charlotte, NC, USA",
+                    facebook: "https://www.facebook.com/arden.davies.7",
+                    instagram: "https://www.instagram.com/arden.davies/"
                 }
             ];
 
@@ -424,8 +467,16 @@
                     $el.append($birthdayDiv);
                 }
                 if( member.birthplace ) {
-                    var $birthplaceDiv = $('<div>').text( "Born in " + member.birthplace );
+                    var $birthplaceDiv = $('<div>').addClass("birthplace").text( "Born in " );
+                    var $birthplaceLink = $('<a>').attr('href', "https://www.google.com/maps/place/" + member.birthplace).attr('target','_blank').attr('rel', 'noopener').text(member.birthplace);
+                    $birthplaceDiv.append($birthplaceLink);
                     $el.append($birthplaceDiv);
+                }
+                if( member.picture ) {
+                    var $pictureDiv = $('<div>').addClass("picture");
+                    var $img = $('<img>').attr("src", member.picture);
+                    $pictureDiv.append($img);
+                    $el.append($pictureDiv);
                 }
                 if( member.facebook || member.instagram || member.email || member.twitter ) {
                     var $socialDiv = $('<div>').addClass("social");
@@ -435,17 +486,17 @@
                         $socialDiv.append($email);
                     }
                     if( member.facebook ) {
-                        var $facebook = $('<a>').attr("href", member.facebook);
+                        var $facebook = $('<a>').attr("href", member.facebook).attr("target", "_blank").attr('rel', 'noopener');
                         $facebook.append( $("<i>").addClass("fab").addClass("fa-facebook-square") );
                         $socialDiv.append($facebook);
                     }
                     if( member.twitter ) {
-                        var $twitter = $('<a>').attr("href", member.twitter);
+                        var $twitter = $('<a>').attr("href", member.twitter).attr("target", "_blank").attr('rel', 'noopener');
                         $twitter.append( $("<i>").addClass("fab").addClass("fa-twitter") );
                         $socialDiv.append($twitter);
                     }
                     if( member.instagram ) {
-                        var $instagram = $('<a>').attr("href", member.instagram);
+                        var $instagram = $('<a>').attr("href", member.instagram).attr("target", "_blank").attr('rel', 'noopener');
                         $instagram.append( $("<i>").addClass("fab").addClass("fa-instagram") );
                         $socialDiv.append($instagram);
                     }
@@ -460,53 +511,114 @@
                         drawLine( $("#"+familyMembers[i].fatherId), $("#"+familyMembers[i].id), true );
                     }
                     if(familyMembers[i].spouseId) {
-                        drawLine( $("#"+familyMembers[i].spouseId), $("#"+familyMembers[i].id) );
+                        drawLine( $("#"+familyMembers[i].spouseId), $("#"+familyMembers[i].id), false, familyMembers[i].anniversary );
                     }
                 }
             }
             // Draw line
-            function drawLine($el1, $el2, isChild) {
+            // el1 is either father or wife
+            // el2 is either husband or child
+            function drawLine($el1, $el2, isChild, anniversary) {
                 // Assumes all elements have the same padding, margin, and border on all sides
                 var padding = parseInt($el1.css("paddingLeft").replace("px",""));
                 var borderWidth = parseInt($el1.css("border-left-width").replace("px",""));
+                var margin = parseInt($el1.css("marginLeft").replace("px",""));
+                // We'll include the padding with the border
                 padding += borderWidth;
 
+                // We'll need the offset of the container
                 var containerOffsetTop = $('#container').offset().top;
                 var containerOffsetLeft = $('#container').offset().left;
 
                 var leftOffset = 0;
                 var topOffset = 0;
+                // If it is a child
                 if( isChild ) {
-                    var margin = parseInt($el1.css("marginLeft").replace("px",""));
-                    leftOffset = $el1.width()/2 + padding + margin;
-                    
                     // Find the wife
                     var $wife = $el1.next(".tree-column");
-                    
-                    // Find the vertical incline between the husband and the wife
-                    var incline = $el1.offset().top + ($el1.height()/2) + padding - containerOffsetTop;
-                    incline -= $wife.offset().top + ($wife.height()/2) + padding - containerOffsetTop;
-                    incline = incline * -1;
 
-                    // Find the horizontal distance from the husband point to the wife point
-                    var lineHorizontalLength = leftOffset + ( $wife.width()/2 + padding + margin );
-
-                    // The top offset is going to be the percent the leftOffset is of the whole line
-                    // (the percent of the line corresponding to the husband's side), multiplied by the total
-                    // vertical incline.
-                    topOffset = leftOffset/lineHorizontalLength * incline;
+                    var offset = calculateMidlineStartPosition($el1, $wife, padding, margin, containerOffsetTop);
+                    leftOffset = offset.leftOffset;
+                    topOffset = offset.topOffset;
                 }
 
                 var $svg = $("svg");
                 var $line = $(document.createElementNS("http://www.w3.org/2000/svg", "line"));
                 $svg.append($line);
 
+                // Create the lines
                 var x1 = $el1.offset().left + ($el1.width()/2) + padding + leftOffset - containerOffsetLeft;
                 var y1 = $el1.offset().top + ($el1.height()/2) + padding + topOffset - containerOffsetTop;
                 var x2 = $el2.offset().left + ($el2.width()/2) + padding - containerOffsetLeft;
                 var y2 = $el2.offset().top + ($el2.height()/2) + padding - containerOffsetTop;
 
+                // Draw the line
                 $line.attr('x1',x1).attr('y1',y1).attr('x2',x2).attr('y2',y2);
+                if( !isChild ) {
+                    $line.attr("class","marriage");
+                }
+
+                // Add a caption if there is an anniversary between the husband and wife
+                if( anniversary ) {
+                    var $text = $(document.createElementNS("http://www.w3.org/2000/svg", "text"));
+                    $svg.append($text);
+
+                    // Calculate the angle between the wife (y1/x1) and the husband (y2/x2)
+                    var angle = Math.atan( (y1-y2)/(x1-x2) ); 
+                    var degAngle = angle * (180/Math.PI);
+                    // For now, the x position will be the right of the husband box
+                    var x = $el2.offset().left + $el2.width() + padding * 2 - containerOffsetLeft;
+                    
+                    // We'll start with the midline start position.
+                    // from there, we'll place the text, but then we'll adjust it once we know its size
+                    // to not start at the midline, but be centered at the midline
+                    var offset = calculateMidlineStartPosition($el2, $el1, padding, margin, containerOffsetTop);
+                    leftOffset = offset.leftOffset;
+                    topOffset = offset.topOffset;
+                    var lineHorizontalLength = offset.lineHorizontalLength;
+                    var incline = offset.incline;
+
+                    // The y attribute of the label will be border width
+                    var y = y2 + topOffset - borderWidth;
+                    $text.attr('x', x).attr('y', y).attr("transform", "rotate("+degAngle+","+x+","+y+")").text(anniversary.toLocaleDateString());
+                    
+                    // calculate the text width now that it is available
+                    var textWidth = $text[0].getBBox().width;
+                    var textHeight = $text[0].getBBox().height;
+                    // Add the margin to x (making the start the middle), then subtract textWidth/2, centering the label
+                    x = x + margin - textWidth/2;
+                    // However, since the x position impacts topOffset, we need to recalculate topOffset and y
+                    topOffset = (leftOffset - textWidth/2)/lineHorizontalLength * incline;
+                    y = y2 + topOffset - borderWidth;
+                    // Make the appropriate changes
+                    $text.attr('x', x ).attr('y', y ).attr("transform", "rotate("+degAngle+","+x+","+y+")");
+                }
+            }
+            // Calculate the midline start position between a husband and a wife
+            // This function can account for differences in height between the husband and wife elements
+            // and still find the vertical position of the midpoint.
+            // el1 is husband, el2 is wife
+            function calculateMidlineStartPosition($el1, $el2, padding, margin, containerOffsetTop) {
+                // Get the left offset for the child line (we want it to be inbetween the husband and wife)
+                leftOffset = $el1.width()/2 + padding + margin;
+                
+                // Find the vertical incline between the husband and the wife
+                var incline = $el1.offset().top + ($el1.height()/2) + padding - containerOffsetTop;
+                incline -= $el2.offset().top + ($el2.height()/2) + padding - containerOffsetTop;
+                // If the wife element is below the husband element, incline will be negative since the wife's
+                // position is greater than the husband's. However, the slope is positive, and we want the incline
+                // to be positive too.
+                incline = incline * -1;
+
+                // Find the horizontal distance from the husband point to the wife point
+                var lineHorizontalLength = leftOffset + ( $el2.width()/2 + padding + margin );
+
+                // The top offset is going to be the percent the leftOffset is of the whole line
+                // (the percent of the line corresponding to the husband's side), multiplied by the total
+                // vertical incline.
+                topOffset = leftOffset/lineHorizontalLength * incline;
+
+                return { leftOffset: leftOffset, topOffset: topOffset, lineHorizontalLength: lineHorizontalLength, incline: incline };
             }
             // Wait for a web font to load
             // taken from here: https://stackoverflow.com/questions/4383226/using-jquery-to-know-when-font-face-fonts-are-loaded
