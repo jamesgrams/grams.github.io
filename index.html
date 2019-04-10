@@ -39,7 +39,7 @@
             }
             .tree-column {
                 display: inline-block;
-                margin: 20px;
+                margin: 40px 20px;
                 padding: 10px;
                 border: 2px solid black;
                 position: relative;
@@ -541,6 +541,8 @@
                 // Assumes all elements have the same padding, margin, and border on all sides
                 var padding = parseInt($el1.css("paddingLeft").replace("px",""));
                 var borderWidth = parseInt($el1.css("border-left-width").replace("px",""));
+                // margin has more vertical than horizontal, but thats OK, since all calcualtions with margin
+                // only use horizontal spacing which is what we get here.
                 var margin = parseInt($el1.css("marginLeft").replace("px",""));
                 // We'll include the padding with the border
                 padding += borderWidth;
