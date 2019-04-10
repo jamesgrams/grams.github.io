@@ -13,9 +13,6 @@
                 margin-top: 0;
                 border-bottom: 5px solid black;
             }
-            a {
-                display: block;
-            }
             svg {
                 position: absolute;
                 top: 0;
@@ -36,6 +33,9 @@
             #members {
                 text-align: center;
                 display: inline-block;
+            }
+            #members a {
+                display: block;
             }
             .tree-column {
                 display: inline-block;
@@ -92,6 +92,19 @@
                 height: 10000px;
                 margin-left: auto;
                 margin-right: auto;
+            }
+            .mail-link {
+                text-align: center;
+                display: inline-block;
+            }
+            .mail-link img {
+                width: 170px;
+                display: inline-block;
+                margin-top: 5px;
+                box-shadow: 5px 5px #a0a0a0;
+            }
+            .mail-link + div {
+                font-size: 12px;
             }
         </style>
         <script src="https://code.jquery.com/jquery-latest.min.js"></script>
@@ -700,5 +713,8 @@
         <p>
             Thank you for visiting the Grams Family Website! We hope you enjoy!
         </p>
+        <h2>Mail</h2>
+        <a href="https://mail.yandex.com/" target="_blank" rel="noopener" class="mail-link"><div>Grams Family Mail Login</div><img src="images/envelope.png"></a>
+        <div>Your email/username should be &lt;your_name&gt;@grams.family. If you are having trouble logging in, please contact <a href="mailto:james@grams.family">james@grams.family</a>.</div>
     </body>
 </html>
