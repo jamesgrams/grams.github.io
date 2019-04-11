@@ -36,7 +36,8 @@
                 right: 0;
                 margin-left: auto;
                 margin-right: auto;
-                width: 290px;
+                width: 310px;
+                box-sizing: border-box;
                 transform: translateY(50%);
             }
             svg {
@@ -544,7 +545,7 @@
             }
             // Create a person
             function createPerson(member) {
-                var $el = $('<div>').addClass("tree-column").attr("id", member.id).append("<a>");
+                var $el = $('<div>').addClass("tree-column").attr("onclick","").attr("id", member.id).append("<a>");
                 if( member.link ) {
                     $el.append( $('<a>').attr('href', member.link).attr('target', '_blank').attr('rel', 'noopener').text(member.name) );
                 }
