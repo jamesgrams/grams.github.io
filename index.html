@@ -66,7 +66,7 @@
             .tree-column {
                 display: inline-block;
                 margin: 40px 20px;
-                padding: 10px;
+                padding: 25px;
                 border: 2px solid black;
                 position: relative;
                 z-index: 999;
@@ -108,7 +108,8 @@
                 margin: 20px;
             }
             #container-wrapper {
-                overflow: auto;
+                overflow: scroll;
+                -webkit-overflow-scrolling: touch;
                 width: calc(100% - 32px);
                 border: 6px double #70593d;
                 margin-left: 10px;
@@ -129,15 +130,8 @@
             }
             .mail-link img {
                 width: 50px;
-                display: inline-block;
+                display: block;
                 margin-top: 0;
-                box-shadow: 0 5px #a0a0a0;
-                margin-bottom: 20px;
-            }
-            .mail-link:active img {
-                box-shadow: none;
-                position: relative;
-                top: 5px;
             }
             .mail-link + div {
                 font-size: 12px;
@@ -173,6 +167,7 @@
                     fatherId: "root",
                     spouseId: "evelynphyllisgrams",
                     birthday: new Date(1930, 8, 18, 0, 0, 0),
+                    death: new Date(2016, 11, 1, 0, 0, 0),
                     anniversary: new Date(1952, 2, 20, 0, 0, 0),
                     birthplace: "Fon-du-Lac, WI, USA"
                 },
@@ -469,6 +464,9 @@
                 // We need to wait until fonts are loaded, because fonts impact the size of the boxes
                 // and the box sizes impact the positions of the lines that are drawn
                 waitForWebfonts( ["Playfair Display"], function() {
+                    // Generate the events for the day
+                    generateEvents();
+
                     // We want to draw the graph now
                     addChildren( null, "root", 0 );
 
@@ -558,11 +556,16 @@
                     $el.append($maidenDiv);
                 }
                 if( member.birthday ) {
-                    var today = new Date();
+                    var today = member.death ? member.death : new Date();
                     var millisecondsPerYear = 31556952000;
                     var yearsOld = Math.floor((today.getTime() - member.birthday.getTime())/millisecondsPerYear);
                     var yearsLabel = yearsOld != 1 ? "years" : "year";
-                    var $birthdayDiv = $('<div>').text( member.birthday.toLocaleDateString() + " (" + yearsOld + " " + yearsLabel + " old)" );
+                    var label = member.birthday.toLocaleDateString() + "-";
+                    if( member.death ) {
+                        label += member.death.toLocaleDateString();
+                    }
+                    label += " (" + yearsOld + " " + yearsLabel + " old)";
+                    var $birthdayDiv = $('<div>').text( label );
                     $el.append($birthdayDiv);
                 }
                 if( member.birthplace ) {
@@ -723,6 +726,73 @@
 
                 return { leftOffset: leftOffset, topOffset: topOffset, lineHorizontalLength: lineHorizontalLength, incline: incline };
             }
+            // Generate events
+            function generateEvents() {
+                var todayEvents = "";
+                var upcomingEvents = "";
+                var upcomingDays = 30;
+                var todayDate = new Date();
+                for( var i=0; i<familyMembers.length; i++ ) {
+                    var wifeName = "";
+
+                    if( familyMembers[i].birthday && formatDateComparison(familyMembers[i].birthday) == formatDateComparison(todayDate) ) {
+                        todayEvents += familyMembers[i].name + "'s birthday<br>";
+                    }
+                    else if( familyMembers[i].birthday && compareDate(familyMembers[i].birthday, todayDate, upcomingDays) ) {
+                        upcomingEvents += familyMembers[i].name + "'s birthday (" + familyMembers[i].birthday.toLocaleDateString() + ")<br>";
+                    }
+                    if( familyMembers[i].anniversary && formatDateComparison(familyMembers[i].anniversary) == formatDateComparison(todayDate) ) {
+                        if(!wifeName) { wifeName = getWifeName(familyMembers[i].spouseId); }
+                        todayEvents += familyMembers[i].name + " & " + wifeName + "'s anniversary<br>";
+                    }
+                    else if( familyMembers[i].anniversary && compareDate(familyMembers[i].anniversary, todayDate, upcomingDays) ) {
+                        if(!wifeName) { wifeName = getWifeName(familyMembers[i].spouseId); }
+                        upcomingEvents += familyMembers[i].name + " & " + wifeName + "'s anniversary  (" + familyMembers[i].anniversary.toLocaleDateString() + ")<br>";
+                    }
+
+                }
+                if( !todayEvents ) {
+                    todayEvents = "No events today!";
+                }
+                if( !upcomingEvents ) {
+                    upcomingEvents = "No upcoming events in the next month!";
+                }
+                $('#today-events').html(todayEvents);
+                $('#upcoming-events').html(upcomingEvents);
+            }
+            // Find a wife name
+            function getWifeName(wifeId) {
+                var wifeName = "";
+                for(var i=0;i<familyMembers.length;i++) {
+                    if(familyMembers[i].id == wifeId) {
+                        wifeName = familyMembers[i].name;
+                        break;
+                    }
+                }
+                return wifeName;
+            }
+            // Format date comparison
+            function formatDateComparison(date) {
+                return date.getMonth() + "-" + date.getDate();
+            }
+            // create a date for comparison
+            function compareDate(eventDate, date, daysToAdd) {
+                // First make the event date after the date
+                eventDate = new Date(eventDate);
+                eventDate.setYear( date.getFullYear() ) ;
+                // This is if their birthday is in January and we are in december
+                if( eventDate.getMonth() < date.getMonth() ) {
+                    eventDate.setYear( eventDate.getFullYear() + 1 );
+                }
+                var datePlusDays = new Date(date);
+                datePlusDays.setDate( datePlusDays.getDate() + daysToAdd );
+                if( date.getTime() < eventDate.getTime() && datePlusDays.getTime() > eventDate.getTime() ) {             
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            }
             // Wait for a web font to load
             // taken from here: https://stackoverflow.com/questions/4383226/using-jquery-to-know-when-font-face-fonts-are-loaded
             function waitForWebfonts(fonts, callback) {
@@ -786,7 +856,6 @@
                 for (var i = 0; i < 6; i++) {
                     color += letters[Math.floor(Math.random() * 15)];
                 }
-                console.log(color);
                 return color;
             }
         </script>
@@ -797,6 +866,13 @@
     <body>
         <div class="header"><h1>The Grams Family</h1></div>
         <p>Welcome to the website of the Grams Family. Our family has lived across the globe from South Africa to England to the United States. Enjoy!</p>
+        <h2>Events</h2>
+        <div id="events">
+            <h3>Today</h3>
+            <div id="today-events"></div>
+            <h3>Upcoming</h3>
+            <div id="upcoming-events"></div>
+        </div>
         <h2>Family Tree</h2>
         <!-- wrapper to control scrolling of the container -->
         <div id="container-wrapper">
