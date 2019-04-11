@@ -4,14 +4,40 @@
         <title>Grams Family Website</title>
         <style>
             * {
-                font-family: 'Bree Serif', serif;
+                font-family: 'Playfair Display', serif;
             }
             body {
-                background-color: #baf4d6;
+                background-color: white;
+                text-align: center;
+                margin: 0;
+            }
+            p {
+                margin: 10px;
+            }
+            .header {
+                background-image: url('/images/elishajamesongrams2.jpg');
+                background-size: 100%;
+                background-repeat: no-repeat;
+                background-position: 0 30%; 
+                height: 150px;
+                border-bottom: 2px solid black;
+                position: relative;
+                margin-bottom: 55px;
             }
             h1 {
-                margin-top: 0;
-                border-bottom: 5px solid black;
+                text-shadow: 1px 1px #a0a0a0;
+                padding: 10px;
+                border: 2px solid black;
+                background-color: white;
+                position: absolute;
+                bottom: 0;
+                margin: 0;
+                left: 0;
+                right: 0;
+                margin-left: auto;
+                margin-right: auto;
+                width: 290px;
+                transform: translateY(50%);
             }
             svg {
                 position: absolute;
@@ -25,7 +51,7 @@
                 stroke: black;
             }
             line.marriage {
-                stroke: red;
+                stroke-width: 4px;
             }
             text {
                 font-size: 50%;
@@ -83,8 +109,10 @@
             }
             #container-wrapper {
                 overflow: auto;
-                width: calc(100% - 20px);
-                border: 10px solid #70593d;
+                width: calc(100% - 32px);
+                border: 6px double #70593d;
+                margin-left: 10px;
+                margin-right: 10px;
             }
             #container {
                 position:relative;
@@ -94,14 +122,17 @@
                 margin-right: auto;
             }
             .mail-link {
-                text-align: center;
-                display: inline-block;
+                display: block;
+                position: absolute;
+                top: 15px;
+                right: 15px;
             }
             .mail-link img {
-                width: 170px;
+                width: 50px;
                 display: inline-block;
-                margin-top: 5px;
+                margin-top: 0;
                 box-shadow: 0 5px #a0a0a0;
+                margin-bottom: 20px;
             }
             .mail-link:active img {
                 box-shadow: none;
@@ -129,28 +160,45 @@
                 { 
                     name: "Victoria Leong", 
                     id: "victorialeong", 
-                    fatherId: "daryllgrams"
+                    fatherId: "darellmarkgrams"
                 },
                 { 
-                    name: "Eugene Grams",
-                    id: "eugenegrams",
+                    name: "Evelyn Leong", 
+                    id: "evelynleong", 
+                    fatherId: "andrewleong"
+                },
+                { 
+                    name: "Eugene Edgar Grams",
+                    id: "eugeneedgargrams",
                     fatherId: "root",
-                    spouseId: "phyllisgrams",
-                    anniversary: new Date(1952, 2, 20, 0, 0, 0)
+                    spouseId: "evelynphyllisgrams",
+                    birthday: new Date(1930, 8, 18, 0, 0, 0),
+                    anniversary: new Date(1952, 2, 20, 0, 0, 0),
+                    birthplace: "Fon-du-Lac, WI, USA"
                 },
                 { 
                     name: "Phyllis Evelyn Grams",
-                    id: "phyllisgrams"
+                    id: "evelynphyllisgrams",
+                    maiden: "Evelyn Phyllis Louton",
+                    birthplace: "Detroit, MI, USA",
+                    birthday: new Date(1931, 3, 20, 0, 0, 0)
                 },
                 { 
                     name: "Bryan George Davies",
                     id: "briangeorgedavies",
                     fatherId: "root",
-                    spouseId: "junedavies"
+                    spouseId: "junemollerdavies",
+                    birthplace: "Durban, South Africa",
+                    anniversary: new Date(1959, 11, 19, 0, 0, 0),
+                    birthday: new Date(1937, 2, 9, 0, 0, 0),
+                    email: "protea102@aol.com"
                 },
                 { 
-                    name: "June Davies",
-                    id: "junedavies"
+                    name: "June Moller Davies",
+                    maiden: "June Cowell",
+                    id: "junemollerdavies",
+                    birthplace: "Durban, South Africa",
+                    email: "protea101@aol.com"
                 },
                 { 
                     name: "Ed Carr",
@@ -183,27 +231,31 @@
                     id: "paulabenveymoore"
                 },
                 { 
-                    name: "Daryll Grams", 
-                    id: "daryllgrams", 
-                    fatherId: "eugenegrams",
+                    name: "Darell Mark Grams", 
+                    id: "darellmarkgrams", 
+                    fatherId: "eugeneedgargrams",
+                    birthplace: "Pietersburg, South Africa",
+                    spouseId: "reygrams",
+                    birthday: new Date(1953, 7, 23, 0, 0, 0),
+                    picture: "images/darrellmarkgrams.jpg",
+                    facebook: "https://www.facebook.com/darrell.grams.12"
+                },
+                { 
+                    name: "Rey Grams", 
+                    id: "reygrams"
+                },
+                { 
+                    name: "Dennis Dwight Grams", 
+                    id: "dennisdwightgrams", 
+                    fatherId: "eugeneedgargrams",
                     birthplace: "Welcom, South Africa",
-                    spouseId: "raygrams"
-                },
-                { 
-                    name: "Ray Grams", 
-                    id: "raygrams"
-                },
-                { 
-                    name: "Dennis Grams", 
-                    id: "dennisgrams", 
-                    fatherId: "eugenegrams",
-                    birthplace: "Welcom, South Africa"
+                    birthday: new Date(1956, 9, 29, 0, 0, 0)
                 },
                 { 
                     name: "Rollin Gene Grams", 
                     link: "https://bibleandmission.blogspot.com", 
                     id: "rollingenegrams", 
-                    fatherId: "eugenegrams", 
+                    fatherId: "eugeneedgargrams", 
                     spouseId: "wendydaviesgrams",
                     birthday: new Date(1958, 6, 25, 0, 0, 0),
                     birthplace: "Welcom, South Africa",
@@ -211,12 +263,14 @@
                 },
                 { 
                     name: "Wendy Davies Grams", 
+                    maiden: "Wendy Noleen Davies",
                     link: "https://rachelslearningvillage.wordpress.com", 
                     id: "wendydaviesgrams", 
                     fatherId: "briangeorgedavies",
                     birthday: new Date(1960, 11, 25, 0, 0, 0),
                     birthplace: "Durban, South Africa",
-                    email: "wdgrams@yahoo.com"
+                    email: "wdgrams@yahoo.com",
+                    facebook: "https://www.facebook.com/profile.php?id=100001227453767"
                 },
                 { 
                     name: "Richard Davies", 
@@ -227,21 +281,26 @@
                 },
                 { 
                     name: "Kelly Davies",
+                    maiden: "Kelly Carr",
                     id: "kellydavies", 
                     fatherId: "edcarr",
                     birthplace: "Orlando, FL, USA"
                 },
                 { 
-                    name: "Gary Davies", 
-                    id: "garydavies", 
+                    name: "Gary Jon Davies", 
+                    id: "garyjondavies", 
                     fatherId: "briangeorgedavies",
-                    spouseId: "kristidavies",
-                    birthplace: "Durban, South Africa"
+                    spouseId: "kristindavies",
+                    birthplace: "Durban, South Africa",
+                    birthday: new Date(1969, 3, 16, 0, 0, 0),
+                    anniversary: new Date(1992, 11, 19),
                 },
                 { 
-                    name: "Kristi Davies",
-                    id: "kristidavies", 
+                    name: "Kristin Davies",
+                    maiden: "Kristin Baucom",
+                    id: "kristindavies", 
                     birthplace: "Winston-Salem, NC, USA",
+                    instagram: "https://www.instagram.com/kristi.davies/"
                 },
                 { 
                     name: "David William Mann", 
@@ -254,7 +313,8 @@
                     facebook: "https://www.facebook.com/profile.php?id=100006299160953"
                 },
                 { 
-                    name: "Robin Paula Mann", 
+                    name: "Robin Paula Mann",
+                    maiden: "Robin Moore",
                     id: "robinpaulamann", 
                     fatherId: "robertbarrymoore",
                     birthday: new Date(1964, 9, 7, 0, 0, 0),
@@ -264,12 +324,12 @@
                 { 
                     name: "Brandon Grams", 
                     id: "brandongrams", 
-                    fatherId: "daryllgrams"
+                    fatherId: "darellmarkgrams"
                 },
                 { 
                     name: "Michael Grams", 
                     id: "michaelgrams", 
-                    fatherId: "daryllgrams"
+                    fatherId: "darellmarkgrams"
                 },
                 { 
                     name: "David Rollin Grams", 
@@ -279,7 +339,8 @@
                     birthplace: "Charlotte, NC, USA",
                     email: "grams.david@ymail.com",
                     facebook: "https://www.facebook.com/david.grams.395",
-                    instagram: "https://www.instagram.com/dgrams4/"
+                    instagram: "https://www.instagram.com/dgrams4/",
+                    picture: "images/davidrollingrams.jpg"
                 },
                 { 
                     name: "James Rollin Grams", 
@@ -296,6 +357,7 @@
                 { 
                     name: "Kasey Alexandra Grams", 
                     id: "kaseyalexandragrams", 
+                    maiden: "Kasey Alexandra Mann",
                     fatherId: "davidwilliammann",
                     birthday: new Date(1995, 7, 28, 0, 0, 0),
                     birthplace: "Beverly, MA, USA",
@@ -341,55 +403,64 @@
                     birthplace: "Charlotte, NC, USA",
                     anniversary: new Date(2015, 6, 20, 0, 0, 0),
                     facebook: "https://www.facebook.com/chris.davies.1675",
-                    instagram: "https://www.instagram.com/young_davis/"
+                    instagram: "https://www.instagram.com/young_davis/",
+                    picture: "images/christopherdavies.jpg"
                 },
                 { 
                     name: "Lauren Holley Davies", 
+                    maiden: "Lauren Holley",
                     id: "laurenholleydavies",
                     facebook: "https://www.facebook.com/lauren.holley.9",
-                    instagram: "https://www.instagram.com/laurenh_davies/"
+                    instagram: "https://www.instagram.com/laurenh_davies/",
+                    picture: "images/laurendavies.jpg"
                 },
                 { 
                     name: "Luke Davies", 
                     id: "lukedavies",
                     fatherId: "christopherdavies",
-                    birthplace: "Charlotte, NC, USA"
+                    birthplace: "Charlotte, NC, USA",
+                    picture: "images/timothyandlukedavies.jpg"
                 },
                 { 
                     name: "Timothy Davies", 
                     id: "timothydavies2",
                     fatherId: "christopherdavies",
-                    birthplace: "Charlotte, NC, USA"
+                    birthplace: "Charlotte, NC, USA",
+                    picture: "images/timothyandlukedavies2.jpg"
                 },
                 { 
                     name: "Timothy Davies", 
                     id: "timothydavies", 
                     fatherId: "richarddavies",
                     birthplace: "Charlotte, NC, USA",
-                    facebook: "https://www.facebook.com/tim.davies.9041"
+                    facebook: "https://www.facebook.com/tim.davies.9041",
+                    picture: "images/timothydavies.jpg"
                 },
                 { 
-                    name: "John Sawyer Davies", 
-                    id: "johnsawyerdavies", 
-                    fatherId: "garydavies",
+                    name: "Jon Sawyer Davies", 
+                    id: "jonsawyerdavies", 
+                    fatherId: "garyjondavies",
                     birthplace: "Charlotte, NC, USA",
-                    instagram: "https://www.instagram.com/sawyerdavies17/"
+                    instagram: "https://www.instagram.com/sawyerdavies17/",
+                    picture: "images/jonsawyerdavies.jpg"
                 },
                 { 
                     name: "Elliott Davies", 
                     id: "elliottdavies", 
-                    fatherId: "garydavies",
+                    fatherId: "garyjondavies",
                     birthplace: "Charlotte, NC, USA",
                     facebook: "https://www.facebook.com/elliott.davies.779",
-                    instagram: "https://www.instagram.com/elliott_davies/"
+                    instagram: "https://www.instagram.com/elliott_davies/",
+                    picture: "images/elliottdavies.jpg"
                 },
                 { 
                     name: "Arden Elizabeth Davies", 
                     id: "ardenelizabethdavies", 
-                    fatherId: "garydavies",
+                    fatherId: "garyjondavies",
                     birthplace: "Charlotte, NC, USA",
                     facebook: "https://www.facebook.com/arden.davies.7",
-                    instagram: "https://www.instagram.com/arden.davies/"
+                    instagram: "https://www.instagram.com/arden.davies/",
+                    picture: "images/ardenelizabethdavies.jpg"
                 }
             ];
 
@@ -397,7 +468,7 @@
 
                 // We need to wait until fonts are loaded, because fonts impact the size of the boxes
                 // and the box sizes impact the positions of the lines that are drawn
-                waitForWebfonts( ["Bree Serif"], function() {
+                waitForWebfonts( ["Playfair Display"], function() {
                     // We want to draw the graph now
                     addChildren( null, "root", 0 );
 
@@ -481,6 +552,10 @@
                 }
                 else {
                     $el.text(member.name);
+                }
+                if( member.maiden ) {
+                    var $maidenDiv = $('<div>').addClass("maiden").text( "b. " + member.maiden );
+                    $el.append($maidenDiv);
                 }
                 if( member.birthday ) {
                     var today = new Date();
@@ -583,6 +658,7 @@
                 if( !isChild ) {
                     $line.attr("class","marriage");
                 }
+                $line.css({stroke: getRandomColor()});
 
                 // Add a caption if there is an anniversary between the husband and wife
                 if( anniversary ) {
@@ -605,7 +681,8 @@
                     var incline = offset.incline;
 
                     // The y attribute of the label will be border width
-                    var y = y2 + topOffset - borderWidth;
+                    strokeWidth = parseInt($line.css("strokeWidth").replace("px",""));
+                    var y = y2 + topOffset - strokeWidth;
                     $text.attr('x', x).attr('y', y).attr("transform", "rotate("+degAngle+","+x+","+y+")").text(anniversary.toLocaleDateString());
                     
                     // calculate the text width now that it is available
@@ -615,7 +692,7 @@
                     x = x + margin - textWidth/2;
                     // However, since the x position impacts topOffset, we need to recalculate topOffset and y
                     topOffset = (leftOffset - textWidth/2)/lineHorizontalLength * incline;
-                    y = y2 + topOffset - borderWidth;
+                    y = y2 + topOffset - strokeWidth;
                     // Make the appropriate changes
                     $text.attr('x', x ).attr('y', y ).attr("transform", "rotate("+degAngle+","+x+","+y+")");
                 }
@@ -701,14 +778,26 @@
                     })(fonts[i]);
                 }
             };
+            // Get a random color
+            // Taken from here: https://stackoverflow.com/questions/1484506/random-color-generator
+            function getRandomColor() {
+                var letters = '0123456789ABCDE';
+                var color = '#';
+                for (var i = 0; i < 6; i++) {
+                    color += letters[Math.floor(Math.random() * 15)];
+                }
+                console.log(color);
+                return color;
+            }
         </script>
-        <link href="https://fonts.googleapis.com/css?family=Bree+Serif" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
         <meta name="viewport" content="width=device-width,initial-scale=1">
     </head>
     <body>
-        <h1>Welcome to the Grams Family Website!</h1>
-        <h2>Members</h2>
+        <div class="header"><h1>The Grams Family</h1></div>
+        <p>Welcome to the website of the Grams Family. Our family has lived across the globe from South Africa to England to the United States. Enjoy!</p>
+        <h2>Family Tree</h2>
         <!-- wrapper to control scrolling of the container -->
         <div id="container-wrapper">
             <!-- container for the svg and all the family members -->
@@ -718,10 +807,8 @@
             </div>
         </div>
         <p>
-            Thank you for visiting the Grams Family Website! We hope you enjoy!
+            Thanks for visiting!
         </p>
-        <h2>Mail</h2>
-        <a href="https://mail.yandex.com/" target="_blank" rel="noopener" class="mail-link"><div>Grams Family Mail Login</div><img src="images/envelope.png"></a>
-        <div>Your email/username should be &lt;your_name&gt;@grams.family. If you are having trouble logging in, please contact <a href="mailto:james@grams.family">james@grams.family</a>.</div>
+        <a href="https://mail.yandex.com/" target="_blank" rel="noopener" class="mail-link"><img src="images/envelope.png"></a>
     </body>
 </html>
