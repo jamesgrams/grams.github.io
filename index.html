@@ -7,12 +7,19 @@
                 font-family: 'Playfair Display', serif;
             }
             body {
-                background-color: white;
+                background-color: #006633;
                 text-align: center;
                 margin: 0;
+                color: white;
+            }
+            a {
+                color: white;
             }
             p {
-                margin: 10px;
+                padding: 10px;
+                max-width: 500px;
+                margin-left: auto;
+                margin-right: auto;
             }
             .header {
                 background-image: url('/images/elishajamesongrams2.jpg');
@@ -20,15 +27,14 @@
                 background-repeat: no-repeat;
                 background-position: 0 30%; 
                 height: 150px;
-                border-bottom: 2px solid #663300;
+                border-bottom: 2px solid #351A00;
                 position: relative;
                 margin-bottom: 55px;
             }
             h1 {
                 text-shadow: 1px 1px #a0a0a0;
                 padding: 10px;
-                border: 2px solid #663300;
-                background-color: white;
+                border: 2px solid #351A00;
                 position: absolute;
                 bottom: 0;
                 margin: 0;
@@ -40,7 +46,7 @@
                 box-sizing: border-box;
                 transform: translateY(50%);
                 color: white;
-                background-color: #003366;
+                background-color: #663300;
             }
             svg {
                 position: absolute;
@@ -70,10 +76,10 @@
                 display: inline-block;
                 margin: 40px 20px;
                 padding: 25px;
-                border: 2px solid #663300;
+                border: 2px solid #351A00;
                 position: relative;
                 z-index: 999;
-                background-color: #003366;
+                background-color: #663300;
                 color: white;
             }
             .tree-column a {
@@ -98,7 +104,7 @@
                 top: 0;
                 transform: translateY(-100%);
                 left: -2px;
-                border: 2px solid #663300;
+                border: 2px solid #351A00;
                 width: 100%;
             }
             .picture img {
@@ -115,7 +121,7 @@
                 overflow: scroll;
                 -webkit-overflow-scrolling: touch;
                 width: calc(100% - 32px);
-                border: 6px double #663300;
+                border: 6px double #351A00;
                 margin-left: 10px;
                 margin-right: 10px;
             }
@@ -145,17 +151,12 @@
                 margin-right: 10px;
             }
             #footer {
-                border-top: 2px solid #663300;
+                border-top: 2px solid #351A00;
                 margin-top: 20px;
                 padding-top: 40px;
                 padding-bottom: 40px;
                 color: white;
-                background-color: #003366;
-            }
-            p {
-                max-width: 500px;
-                margin-left: auto;
-                margin-right: auto;
+                background-color: #663300;
             }
             #footer a {
                 color: white;
@@ -904,12 +905,68 @@
             // Get a random color
             // Taken from here: https://stackoverflow.com/questions/1484506/random-color-generator
             function getRandomColor() {
-                var letters = '0123456789ABCDE';
+                var letters = '0123456789ABCDEF';
                 var color = '#';
                 for (var i = 0; i < 6; i++) {
                     color += letters[Math.floor(Math.random() * 15)];
                 }
+                // Keep generating random colors until we get one light (unlike background color)
+                if( isLightColor(color) ) {
+                    return getRandomColor();
+                }
                 return color;
+            }
+            // Make sure a color has a lightness over 0.8, (background [006633] = 0.4166666666666667)
+            // Idea from here: https://stackoverflow.com/questions/13586999/color-difference-similarity-between-two-values-with-js
+            function isLightColor(hex1) {
+                var rgb1 = hexToRgb(hex1);
+                var hsv1 = rgbToHsv(rgb1.r, rgb1.g, rgb1.b);
+                if( hsv1[2] < 0.9 ) return true; // We only want light colors
+                return false;
+            }
+            // rgb to hsv 
+            // taken from here: http://axonflux.com/handy-rgb-to-hsl-and-rgb-to-hsv-color-model-c
+            /**
+            * Converts an RGB color value to HSV. Conversion formula
+            * adapted from http://en.wikipedia.org/wiki/HSV_color_space.
+            * Assumes r, g, and b are contained in the set [0, 255] and
+            * returns h, s, and v in the set [0, 1].
+            *
+            * @param   Number  r       The red color value
+            * @param   Number  g       The green color value
+            * @param   Number  b       The blue color value
+            * @return  Array           The HSV representation
+            */
+            function rgbToHsv(r, g, b){
+                r = r/255, g = g/255, b = b/255;
+                var max = Math.max(r, g, b), min = Math.min(r, g, b);
+                var h, s, v = max;
+
+                var d = max - min;
+                s = max == 0 ? 0 : d / max;
+
+                if(max == min){
+                    h = 0; // achromatic
+                }else{
+                    switch(max){
+                        case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+                        case g: h = (b - r) / d + 2; break;
+                        case b: h = (r - g) / d + 4; break;
+                    }
+                    h /= 6;
+                }
+
+                return [h, s, v];
+            }
+            // hex to rgb
+            // Taken from here: https://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb/5624139
+            function hexToRgb(hex) {
+                var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+                return result ? {
+                    r: parseInt(result[1], 16),
+                    g: parseInt(result[2], 16),
+                    b: parseInt(result[3], 16)
+                } : null;
             }
         </script>
         <link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet">
