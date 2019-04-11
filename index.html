@@ -66,6 +66,7 @@
                 stroke-width: 4px;
             }
             text {
+                fill: white;
                 font-size: 50%;
             }
             #members {
@@ -120,13 +121,23 @@
             .tree-row {
                 margin: 20px;
             }
+            /* we need this to allow a border that looks nice
+            * which it doesn't with the margin/padding trick used
+            * to get images to escape the overflow scroll 
+            https://stackoverflow.com/questions/6421966/css-overflow-x-visible-and-overflow-y-hidden-causing-scrollbar-issue */
+            #container-wrapper-wrapper {
+                border: 6px double #351A00;
+                width: calc(100% - 32px);
+                margin-left: 10px;
+                margin-right: 10px;
+            }
             #container-wrapper {
                 overflow: scroll;
                 -webkit-overflow-scrolling: touch;
-                width: calc(100% - 32px);
-                border: 6px double #351A00;
-                margin-left: 10px;
-                margin-right: 10px;
+                width: 100%;
+                margin: 0;
+                margin-top:-1000px;
+                padding-top:1000px;
             }
             #container {
                 position:relative;
@@ -187,7 +198,8 @@
                 { 
                     name: "Evelyn Leong", 
                     id: "evelynleong", 
-                    fatherId: "andrewleong"
+                    fatherId: "andrewleong",
+                    picture: "images/evelynleong.png"
                 },
                 { 
                     name: "Eugene Edgar Grams",
@@ -214,14 +226,16 @@
                     birthplace: "Durban, South Africa",
                     anniversary: new Date(1959, 11, 19, 0, 0, 0),
                     birthday: new Date(1937, 2, 9, 0, 0, 0),
-                    email: "protea102@aol.com"
+                    email: "protea102@aol.com",
+                    picture: "images/bryangeorgedavies.jpg"
                 },
                 { 
                     name: "June Moller Davies",
                     maiden: "June Cowell",
                     id: "junemollerdavies",
                     birthplace: "Durban, South Africa",
-                    email: "protea101@aol.com"
+                    email: "protea101@aol.com",
+                    picture: "images/junemollerdavies.jpg"
                 },
                 { 
                     name: "Ed Carr",
@@ -244,14 +258,20 @@
                     id: "thelmajomann"
                 },
                 { 
-                    name: "Robert Barry Moore",
-                    id: "robertbarrymoore",
+                    name: "Robert Henry Moore",
+                    id: "roberthenrymoore",
                     fatherId: "root",
-                    spouseId: "paulabenveymoore"
+                    spouseId: "paulabenviemoore",
+                    birthday: new Date(1928, 1, 11, 0, 0, 0),
+                    death: new Date(2003, 8, 11, 0, 0, 0),
+                    birthplace: "Manchester, MA, USA" 
                 },
                 { 
-                    name: "Paula Benvey Moore", 
-                    id: "paulabenveymoore"
+                    name: "Paula Benvie Moore", 
+                    id: "paulabenviemoore",
+                    birthday: new Date(1930, 0, 10, 0, 0, 0),
+                    death: new Date(2006, 10, 1, 0, 0, 0),
+                    birthplace: "Andover, MA, USA" 
                 },
                 { 
                     name: "Darell Mark Grams", 
@@ -282,7 +302,8 @@
                     spouseId: "wendydaviesgrams",
                     birthday: new Date(1958, 6, 25, 0, 0, 0),
                     birthplace: "Welcom, South Africa",
-                    email: "rollingrams@yahoo.com"
+                    email: "rollingrams@yahoo.com",
+                    picture: "images/rollingenegrams.jpg"
                 },
                 { 
                     name: "Wendy Davies Grams", 
@@ -293,7 +314,8 @@
                     birthday: new Date(1960, 11, 25, 0, 0, 0),
                     birthplace: "Durban, South Africa",
                     email: "wdgrams@yahoo.com",
-                    facebook: "https://www.facebook.com/profile.php?id=100001227453767"
+                    facebook: "https://www.facebook.com/profile.php?id=100001227453767",
+                    picture: "images/wendydaviesgrams.jpg"
                 },
                 { 
                     name: "Richard Davies", 
@@ -307,7 +329,8 @@
                     maiden: "Kelly Carr",
                     id: "kellycarrdavies", 
                     fatherId: "edcarr",
-                    birthplace: "Orlando, FL, USA"
+                    birthplace: "Orlando, FL, USA",
+                    picture: "images/kellycarrdavies.jpg"
                 },
                 { 
                     name: "Gary Jon Davies", 
@@ -331,7 +354,7 @@
                     fatherId: "edwinmann", 
                     spouseId: "robinpaulamann",
                     birthday: new Date(1965, 3, 22, 0, 0, 0),
-                    birthplace: "Haverhill, MA, USA",
+                    birthplace: "Boston, MA, USA",
                     anniversary: new Date(1988, 8, 17, 0, 0, 0),
                     facebook: "https://www.facebook.com/profile.php?id=100006299160953"
                 },
@@ -339,10 +362,24 @@
                     name: "Robin Paula Mann",
                     maiden: "Robin Moore",
                     id: "robinpaulamann", 
-                    fatherId: "robertbarrymoore",
+                    fatherId: "roberthenrymoore",
                     birthday: new Date(1964, 9, 7, 0, 0, 0),
-                    birthplace: "Beverly, MA, USA",
+                    birthplace: "Ipswich, MA, USA",
                     facebook: "https://www.facebook.com/robin.mann.969"
+                },
+                { 
+                    name: "Barry Benvie Moore",
+                    id: "barrybenviemoore", 
+                    fatherId: "roberthenrymoore",
+                    birthday: new Date(1946, 1, 13, 0, 0, 0),
+                    birthplace: "Beverly, MA, USA"
+                },
+                { 
+                    name: "Bryan Earle Moore",
+                    id: "barryearlemoore", 
+                    fatherId: "roberthenrymoore",
+                    birthday: new Date(1951, 8, 17, 0, 0, 0),
+                    birthplace: "Ipswich, MA, USA"
                 },
                 { 
                     name: "Brandon Grams", 
@@ -443,7 +480,7 @@
                     fatherId: "christopherdavies",
                     birthplace: "Charlotte, NC, USA",
                     birthday: new Date(2017, 11, 21, 0, 0, 0),
-                    picture: "images/timothyandlukedavies.jpg"
+                    picture: "images/lukericharddavies.jpg"
                 },
                 { 
                     name: "Timothy Robert Davies", 
@@ -451,7 +488,7 @@
                     fatherId: "christopherdavies",
                     birthplace: "Charlotte, NC, USA",
                     birthday: new Date(2017, 11, 21, 0, 0, 0),
-                    picture: "images/timothyandlukedavies2.jpg"
+                    picture: "images/timothyrobertdavies.jpg"
                 },
                 { 
                     name: "Timothy Davies", 
@@ -507,6 +544,7 @@
                     var $membersHeight = $('#members').height() + 2
                     $("#container").height( $membersHeight );
                     // 20 for the scrollbar, only 2 is needed line before
+                    // setting the max height of the wrapper here
                     $("#container-wrapper").height( Math.min( $membersHeight + 20, 1000 ) ); // Up to 500px high before having scroll
                     
                     // Draw all the lines
@@ -998,11 +1036,13 @@
         </div>
         <h2>Family Tree</h2>
         <!-- wrapper to control scrolling of the container -->
-        <div id="container-wrapper">
-            <!-- container for the svg and all the family members -->
-            <div id="container">
-                <div id="members"></div>
-                <svg></svg>
+        <div id="container-wrapper-wrapper">
+            <div id="container-wrapper">
+                <!-- container for the svg and all the family members -->
+                <div id="container">
+                    <div id="members"></div>
+                    <svg></svg>
+                </div>
             </div>
         </div>
         <div id="footer">
