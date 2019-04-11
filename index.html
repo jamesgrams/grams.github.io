@@ -132,7 +132,7 @@
                 margin-right: 10px;
             }
             #container-wrapper {
-                overflow: scroll;
+                overflow-x: scroll;
                 -webkit-overflow-scrolling: touch;
                 width: 100%;
                 margin: 0;
@@ -545,7 +545,8 @@
                     $("#container").height( $membersHeight );
                     // 20 for the scrollbar, only 2 is needed line before
                     // setting the max height of the wrapper here
-                    $("#container-wrapper").height( Math.min( $membersHeight + 20, 1000 ) ); // Up to 500px high before having scroll
+                    // don't have one for now
+                    // $("#container-wrapper").height( Math.min( $membersHeight + 20, 1000 ) ); // Up to 500px high before having scroll
                     
                     // Draw all the lines
                     addConnections();
