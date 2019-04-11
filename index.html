@@ -20,14 +20,14 @@
                 background-repeat: no-repeat;
                 background-position: 0 30%; 
                 height: 150px;
-                border-bottom: 2px solid black;
+                border-bottom: 2px solid #663300;
                 position: relative;
                 margin-bottom: 55px;
             }
             h1 {
                 text-shadow: 1px 1px #a0a0a0;
                 padding: 10px;
-                border: 2px solid black;
+                border: 2px solid #663300;
                 background-color: white;
                 position: absolute;
                 bottom: 0;
@@ -39,6 +39,8 @@
                 width: 315px;
                 box-sizing: border-box;
                 transform: translateY(50%);
+                color: white;
+                background-color: #003366;
             }
             svg {
                 position: absolute;
@@ -68,19 +70,20 @@
                 display: inline-block;
                 margin: 40px 20px;
                 padding: 25px;
-                border: 2px solid black;
+                border: 2px solid #663300;
                 position: relative;
                 z-index: 999;
-                background-color: white;
+                background-color: #003366;
+                color: white;
+            }
+            .tree-column a {
+                color: white;
             }
             .tree-column div {
                 font-size: 75%;
             }
             .tree-column .social {
                 font-size: 100%;
-            }
-            .tree-column .social a {
-                color: black;
             }
             #members .tree-column .social a {
                 display: inline-block;
@@ -95,7 +98,7 @@
                 top: 0;
                 transform: translateY(-100%);
                 left: -2px;
-                border: 2px solid black;
+                border: 2px solid #663300;
                 width: 100%;
             }
             .picture img {
@@ -112,7 +115,7 @@
                 overflow: scroll;
                 -webkit-overflow-scrolling: touch;
                 width: calc(100% - 32px);
-                border: 6px double #70593d;
+                border: 6px double #663300;
                 margin-left: 10px;
                 margin-right: 10px;
             }
@@ -136,6 +139,26 @@
             }
             .mail-link + div {
                 font-size: 12px;
+            }
+            #events {
+                margin-left: 10px;
+                margin-right: 10px;
+            }
+            #footer {
+                border-top: 2px solid #663300;
+                margin-top: 20px;
+                padding-top: 40px;
+                padding-bottom: 40px;
+                color: white;
+                background-color: #003366;
+            }
+            p {
+                max-width: 500px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            #footer a {
+                color: white;
             }
         </style>
         <script src="https://code.jquery.com/jquery-latest.min.js"></script>
@@ -272,13 +295,13 @@
                     name: "Richard Davies", 
                     id: "richarddavies", 
                     fatherId: "briangeorgedavies",
-                    spouseId: "kellydavies",
+                    spouseId: "kellycarrdavies",
                     birthplace: "Durban, South Africa"
                 },
                 { 
-                    name: "Kelly Davies",
+                    name: "Kelly Carr Davies",
                     maiden: "Kelly Carr",
-                    id: "kellydavies", 
+                    id: "kellycarrdavies", 
                     fatherId: "edcarr",
                     birthplace: "Orlando, FL, USA"
                 },
@@ -411,17 +434,19 @@
                     picture: "images/laurendavies.jpg"
                 },
                 { 
-                    name: "Luke Davies", 
-                    id: "lukedavies",
+                    name: "Luke Richard Davies", 
+                    id: "lukericharddavies",
                     fatherId: "christopherdavies",
                     birthplace: "Charlotte, NC, USA",
+                    birthday: new Date(2017, 11, 21, 0, 0, 0),
                     picture: "images/timothyandlukedavies.jpg"
                 },
                 { 
-                    name: "Timothy Davies", 
-                    id: "timothydavies2",
+                    name: "Timothy Robert Davies", 
+                    id: "timothyrobertdavies",
                     fatherId: "christopherdavies",
                     birthplace: "Charlotte, NC, USA",
+                    birthday: new Date(2017, 11, 21, 0, 0, 0),
                     picture: "images/timothyandlukedavies2.jpg"
                 },
                 { 
@@ -438,7 +463,8 @@
                     fatherId: "garyjondavies",
                     birthplace: "Charlotte, NC, USA",
                     instagram: "https://www.instagram.com/sawyerdavies17/",
-                    picture: "images/jonsawyerdavies.jpg"
+                    picture: "images/jonsawyerdavies.jpg",
+                    birthday: new Date(1997, 0, 18, 0, 0, 0)
                 },
                 { 
                     name: "Elliott Davies", 
@@ -729,29 +755,55 @@
             }
             // Generate events
             function generateEvents() {
-                var todayEvents = "";
-                var upcomingEvents = "";
+                var todayEvents = [];
+                var upcomingEvents = [];
                 var upcomingDays = 30;
                 var todayDate = new Date();
                 for( var i=0; i<familyMembers.length; i++ ) {
                     var wifeName = "";
 
                     if( familyMembers[i].birthday && formatDateComparison(familyMembers[i].birthday) == formatDateComparison(todayDate) ) {
-                        todayEvents += familyMembers[i].name + "'s birthday<br>";
+                        todayEvents.push(familyMembers[i].name + "'s birthday");
                     }
                     else if( familyMembers[i].birthday && compareDate(familyMembers[i].birthday, todayDate, upcomingDays) ) {
-                        upcomingEvents += familyMembers[i].name + "'s birthday (" + familyMembers[i].birthday.toLocaleDateString() + ")<br>";
+                        upcomingEvents.push( {str: familyMembers[i].name + "'s birthday (" + familyMembers[i].birthday.toLocaleDateString() + ")", date: familyMembers[i].birthday} );
                     }
                     if( familyMembers[i].anniversary && formatDateComparison(familyMembers[i].anniversary) == formatDateComparison(todayDate) ) {
                         if(!wifeName) { wifeName = getWifeName(familyMembers[i].spouseId); }
-                        todayEvents += familyMembers[i].name + " & " + wifeName + "'s anniversary<br>";
+                        todayEvents.push(familyMembers[i].name + " & " + wifeName + "'s anniversary");
                     }
                     else if( familyMembers[i].anniversary && compareDate(familyMembers[i].anniversary, todayDate, upcomingDays) ) {
                         if(!wifeName) { wifeName = getWifeName(familyMembers[i].spouseId); }
-                        upcomingEvents += familyMembers[i].name + " & " + wifeName + "'s anniversary  (" + familyMembers[i].anniversary.toLocaleDateString() + ")<br>";
+                        upcomingEvents.push( {str: familyMembers[i].name + " & " + wifeName + "'s anniversary  (" + familyMembers[i].anniversary.toLocaleDateString() + ")", date: familyMembers[i].anniversary} );
                     }
 
                 }
+
+                // Sort the upcoming events by date
+                upcomingEvents.sort( function(a,b) {
+                    var aDate = new Date(a.date);
+                    var bDate = new Date(b.date);
+                    aDate.setYear(todayDate.getFullYear());
+                    bDate.setYear(todayDate.getFullYear());
+                    // This is if their birthday is in January and we are in december
+                    if( aDate.getMonth() < todayDate.getMonth() ) {
+                        aDate.setYear( todayDate.getFullYear() + 1 );
+                    }
+                    if( bDate.getMonth() < todayDate.getMonth() ) {
+                        bDate.setYear( todayDate.getFullYear() + 1 );
+                    }
+                    if(aDate > bDate) return 1;
+                    if(bDate > aDate) return -1;
+                    return 0;
+                } );
+
+                // Get rid of the dates we stored
+                upcomingEvents = upcomingEvents.map( function(item) {
+                    return item.str;
+                } );
+                upcomingEvents = upcomingEvents.join("<br>");
+                todayEvents = todayEvents.join("<br>");
+
                 if( !todayEvents ) {
                     todayEvents = "No events today!";
                 }
@@ -883,9 +935,12 @@
                 <svg></svg>
             </div>
         </div>
-        <p>
-            Thanks for visiting!
-        </p>
+        <div id="footer">
+            <p>Created by James Grams
+            <p>If you have some information to add (a picture, a family member, etc.), please email <a href="mailto:james@game103.net">me</a> or submit a pull request on <a href="https://github.com/jamesgrams/grams.github.io/" target="_blank" rel="noopener">GitHub</a> if you are tech savvy.
+            <p>If you would like an email address @grams.family, please email <a href="mailto:james@game103.net">me</a>.</p>
+            <p>Thanks for visiting!</p>
+        </div>
         <a href="https://mail.yandex.com/" target="_blank" rel="noopener" class="mail-link"><img src="images/envelope.png"></a>
     </body>
 </html>
