@@ -7,13 +7,13 @@
                 font-family: 'Playfair Display', serif;
             }
             body {
-                background-color: #006633;
+                background-color: #00381c;
                 text-align: center;
                 margin: 0;
                 color: white;
             }
             a {
-                color: white;
+                color: black;
             }
             p {
                 padding: 10px;
@@ -22,19 +22,19 @@
                 margin-right: auto;
             }
             .header {
-                background-image: url('/images/elishajamesongrams2.jpg');
+                background-image: url('/images/header.jpg');
                 background-size: 100%;
                 background-repeat: no-repeat;
-                background-position: 0 30%; 
+                background-position: 0 20%; 
                 height: 175px;
-                border-bottom: 2px solid #351A00;
+                border-bottom: 4px solid #351A00;
                 position: relative;
                 margin-bottom: 55px;
             }
             h1 {
                 text-shadow: 1px 1px #a0a0a0;
                 padding: 10px;
-                border: 2px solid #351A00;
+                border: 4px solid #351A00;
                 position: absolute;
                 bottom: 0;
                 margin: 0;
@@ -53,6 +53,7 @@
                 left: 0;
                 width: 100%;
                 height: 100%;
+                background-color: #006633;
             }
             line {
                 stroke-width: 2;
@@ -80,7 +81,7 @@
                 display: inline-block;
                 margin: 40px 20px;
                 padding: 25px;
-                border: 2px solid #351A00;
+                border: 4px solid #351A00;
                 position: relative;
                 z-index: 999;
                 background-color: #663300;
@@ -107,8 +108,8 @@
                 position: absolute;
                 top: 0;
                 transform: translateY(-100%);
-                left: -2px;
-                border: 2px solid #351A00;
+                left: -4px;
+                border: 4px solid #351A00;
                 width: 100%;
             }
             .picture img {
@@ -126,7 +127,7 @@
             * to get images to escape the overflow scroll 
             https://stackoverflow.com/questions/6421966/css-overflow-x-visible-and-overflow-y-hidden-causing-scrollbar-issue */
             #container-wrapper-wrapper {
-                border: 6px double #351A00;
+                border: 8px double #351A00;
                 width: calc(100% - 32px);
                 margin-left: 10px;
                 margin-right: 10px;
@@ -165,7 +166,7 @@
                 margin-right: 10px;
             }
             #footer {
-                border-top: 2px solid #351A00;
+                border-top: 4px solid #351A00;
                 margin-top: 20px;
                 padding-top: 40px;
                 padding-bottom: 40px;
@@ -440,7 +441,15 @@
                     fatherId: "jamesrollingrams",
                     birthday: new Date(2019, 2, 21, 16, 30, 0),
                     birthplace: "Beverly, MA, USA",
-                    picture: "images/elishajamesongrams.jpg"
+                    picture: "images/elishajamesongrams3.jpg"
+                },
+                { 
+                    name: "Adalaide Alexandra Grams", 
+                    id: "adelaidealexandragrams", 
+                    fatherId: "jamesrollingrams",
+                    birthday: new Date(2022, 3, 11, 7, 30, 0),
+                    birthplace: "Huntersville, NC, USA",
+                    picture: "images/adalaidealexandragrams.jpg"
                 },
                 { 
                     name: "Rachel Evelyn Davies Grams", 
@@ -489,6 +498,13 @@
                     birthplace: "Charlotte, NC, USA",
                     birthday: new Date(2017, 11, 21, 0, 0, 0),
                     picture: "images/timothyrobertdavies.jpg"
+                },
+                { 
+                    name: "Holley Davies", 
+                    id: "holleydavies",
+                    fatherId: "christopherdavies",
+                    birthplace: "Charlotte, NC, USA",
+                    birthday: new Date(2020, 11, 1, 0, 0, 0)
                 },
                 { 
                     name: "Timothy Davies", 
@@ -540,8 +556,8 @@
 
                     // calculate the height and width to make the container
                     // These numbers added work, but not sure why exactly these extra values are needed
-                    $("#container").width( $('#members').width() + 2 );
-                    var $membersHeight = $('#members').height() + 2
+                    $("#container").width( $('#members').width() + 4 );
+                    var $membersHeight = $('#members').height() + 4
                     $("#container").height( $membersHeight );
                     // 20 for the scrollbar, only 2 is needed line before
                     // setting the max height of the wrapper here
@@ -1027,31 +1043,32 @@
     </head>
     <body>
         <div class="header"><h1>The Grams Family</h1></div>
-        <p>Welcome to the website of the Grams Family. Our family has lived across the globe from South Africa to England to the United States. Enjoy!</p>
-        <h2>Events</h2>
-        <div id="events">
-            <h3>Today</h3>
-            <div id="today-events"></div>
-            <h3>Upcoming</h3>
-            <div id="upcoming-events"></div>
-        </div>
-        <h2>Family Tree</h2>
-        <!-- wrapper to control scrolling of the container -->
-        <div id="container-wrapper-wrapper">
-            <div id="container-wrapper">
-                <!-- container for the svg and all the family members -->
-                <div id="container">
-                    <div id="members"></div>
-                    <svg></svg>
+        <main>
+            <p>Welcome to the website of the Grams Family. Our family has lived across the globe from South Africa to England to the United States. Enjoy!</p>
+            <h2>Events</h2>
+            <div id="events">
+                <h3>Today</h3>
+                <div id="today-events"></div>
+                <h3>Upcoming</h3>
+                <div id="upcoming-events"></div>
+            </div>
+            <h2>Family Tree</h2>
+            <!-- wrapper to control scrolling of the container -->
+            <div id="container-wrapper-wrapper">
+                <div id="container-wrapper">
+                    <!-- container for the svg and all the family members -->
+                    <div id="container">
+                        <div id="members"></div>
+                        <svg></svg>
+                    </div>
                 </div>
             </div>
-        </div>
+        </main>
         <div id="footer">
             <p>Created by <a href="https://jamesgrams.com" target="_blank" rel="noopener noreferrer">James Grams</a>
-            <p>If you have some information to add (a picture, a family member, etc.), please email <a href="mailto:james@game103.net">me</a> or submit a pull request on <a href="https://github.com/jamesgrams/grams.github.io/" target="_blank" rel="noopener">GitHub</a> if you are tech savvy.
+            <p>If you have some information to add (a picture, a family member, etc.), please email <a href="mailto:james@game103.net">me</a>.
             <p>If you would like an email address @grams.family, please email <a href="mailto:james@game103.net">me</a>.</p>
             <p>Thanks for visiting!</p>
         </div>
-        <a href="https://mail.yandex.com/" target="_blank" rel="noopener" class="mail-link"><img src="images/envelope.png"></a>
     </body>
 </html>
